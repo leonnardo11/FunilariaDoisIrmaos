@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: "nunito-regular",
     color: "#121212",
     height: 60,
-    width: 360,
+    width: 314,
     borderWidth: 2,
     borderColor: "rgba(40,47,102,1)",
     backgroundColor: "#F5F7F9",
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   loginButton: {
-    width: 360,
+    width: 314,
     height: 61,
     backgroundColor: "rgba(40,47,102,1)",
     borderRadius: 5,

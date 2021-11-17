@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
     color: "rgba(40,47,102,1)",
     fontSize: 34,
     marginTop: 79,
-    marginLeft: 40
+    textAlign: "center"
   },
   perfil: {
     fontFamily: "nunito-600",
     color: "#121212",
     fontSize: 16,
     marginTop: 7,
-    marginLeft: 160
+    textAlign: "center"
   },
   subtitle: {
     fontFamily: "nunito-700",
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     marginLeft: 21
   },
   button: {
-    width: 360,
+    width: 314,
     height: 61,
     backgroundColor: "#282f66",
     borderRadius: 5,

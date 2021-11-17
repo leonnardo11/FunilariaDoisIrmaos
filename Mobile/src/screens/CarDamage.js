@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
 
-function Main1(props) {
+function CarDamage(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Danos a Lataria</Text>
@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
   },
   iconeEsquerda: {
     top: 133,
-    left: 0,
+    left: 20,
     position: "absolute",
     color: "rgba(0,0,0,1)",
     fontSize: 40
   },
   iconeBaixo: {
-    top: 292,
+    top: 280,
     left: 111,
     position: "absolute",
     color: "rgba(0,0,0,1)",
@@ -88,15 +88,15 @@ const styles = StyleSheet.create({
     width: 242,
     height: 336,
     marginTop: 46,
-    marginLeft: 64
+    marginLeft: 36
   },
   sendBTN: {
-    width: 360,
+    width: 314,
     height: 61,
     backgroundColor: "#282f66",
     borderRadius: 5,
-    marginTop: 86,
-    marginLeft: 21
+    marginTop: 20,
+    marginLeft: 22
   },
   btntitle: {
     fontFamily: "Oxygen",
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Main1;
+export default CarDamage;

@@ -56,8 +56,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   title: {
-    top: 0,
-    left: 0,
     position: "absolute",
     fontFamily: "nunito-700",
     color: "rgba(40,47,102,1)",
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
   titleStack: {
     width: 321,
     height: 82,
-    marginTop: 120,
+    marginTop: 90,
     marginBottom: 20,
     marginLeft: 26
   },
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
     fontFamily: "nunito-regular",
     color: "#121212",
     height: 60,
-    width: 360,
+    width: 314,
     borderWidth: 2,
     borderColor: "rgba(40,47,102,1)",
     backgroundColor: "#F5F7F9",
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   loginButton: {
-    width: 360,
+    width: 314,
     height: 61,
     backgroundColor: "rgba(40,47,102,1)",
     borderRadius: 5,
@@ -103,13 +101,12 @@ const styles = StyleSheet.create({
   forgetPassBtn: {
     width: 184,
     height: 35,
-    marginTop: 143,
+    marginTop: 100,
     marginLeft: 96
   },
   esqueciMinhaSenha: {
     fontFamily: "nunito-700",
     color: "rgba(40,47,102,1)",
-    marginTop: 8,
     marginLeft: 25
   },
   newAccountBTN: {
