@@ -2,7 +2,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { parseJwt, userAuthentication } from '../../services/Auth';
+import { parseJwt } from '../../services/Auth';
+import swal from 'sweetalert'
 
 // Styles
 import "../../assets/styles/reset.css";
@@ -31,106 +32,43 @@ export default class Login extends Component {
 
 
     efetuaLogin = (event) => {
-
-        // Ignora o comportamento padrão do navegador (recarregar a página, por exemplo)
-
         event.preventDefault();
-
-        // Remove a frase de erro do state erroMensagem e define que a requisição está em andamento
-
         this.setState({ erroMensagem: '', isLoading: true });
-        // Define a URL e o corpo da requisição
-
         axios.post('http://44.195.209.235/api/login', {
-
             email: this.state.email,
             password: this.state.password
 
         })
-            // Verifica o retorno da requisição
             .then(resposta => {
-
-                // Caso o status code seja 200,
 
                 if (resposta.status === 200) {
 
-                    // salva o token no localStorage,
-
                     localStorage.setItem('user-token', resposta.data.token);
-
-                    // exibe o token no console do navegador
-
-                    console.log('Meu token é: ' + resposta.data.token);
-
-                    // e define que a requisição terminou
-
                     this.setState({ isLoading: false })
-
-                    // Define a variável base64 que vai receber o payload do token
-
                     let base64 = localStorage.getItem('user-token').split('.')[1];
-
-                    // Exibe no console o valor presente na variável base64
-
-                    console.log(base64);
-
-                    // Exibe no console o valor convertido de base64 para string
-
-                    console.log(window.atob(base64));
-
-                    // Exibe no console o valor convertido da string para JSON
-
-                    console.log(JSON.parse(window.atob(base64)));
-
-                    // Exibe no console apenas o tipo de usuário logado
-                    console.log("teste:" + parseJwt().role);
-
-                    // Verifica se o tipo de usuário logado é Administrador
-
-                    // Se for, redireciona para a página de Tipos Eventos
                     
                     if (parseJwt().role === 'Administrador') {
-
                         this.props.history.push('/Home');
-
-                        console.log('estou logado: ' + userAuthentication());
-
                     }
-
-
-
-                    // Se não for, redireciona para a página home
-
                     else {
-
-                        this.props.history.push('/')
-
+                        this.props.history.push('/Home')
                     }
-
                 }
 
             })
-
-            // Caso haja um erro,
-
             .catch(() => {
-
-                // define o state erroMensagem com uma mensagem personalizada e que a requisição terminou
-
-                this.setState({ erroMensagem: 'E-mail ou senha inválidos! Tente novamente.', isLoading: false });
-
+                swal("Error!", "Usuário ou senha Invalidos!", "error");
             })
 
     }
 
-
-    // pode ser reutilizada em vários inputs diferentes
-
     atualizaStateCampo = (campo) => {
-
         this.setState({ [campo.target.name]: campo.target.value })
-
     };
+
+    componentDidMount(){
+        document.title = "Login"
+    }
 
 
     cancelaModal = () => {

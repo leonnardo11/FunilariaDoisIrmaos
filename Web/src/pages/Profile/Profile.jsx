@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { parseJwt } from '../../services/Auth';
 
 // Styles
 import '../../assets/styles/reset.css';
@@ -20,10 +21,31 @@ class Profile extends Component {
         super(props);
         this.state = {
             example : '',
-
+            userInfo: [],
             isModalOpen : false
         }
     }
+
+    getUserInfo = (user) => {
+        axios('http://44.195.209.235/api/Users/' + parseJwt().jti , {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            }
+            
+        })
+            .then(resposta => {
+                if (resposta.status === 200) {
+                    this.setState({ getUserInfo: resposta.data })
+                    console.log(this.state.getUserInfo)
+                }
+            })
+            .catch(erro => console.log(erro));
+    };
+
+    componentDidMount() {
+        this.getUserInfo();
+        document.title = "Meus Veículos"
+    };
 
     cancelaModal = () => {
         this.setState({ isModalOpen : false })

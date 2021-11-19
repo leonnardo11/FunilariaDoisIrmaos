@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { userAuthentication } from '../../services/Auth';
+import { parseJwt, userAuthentication } from '../../services/Auth';
 
 // Styles
 import "../../assets/styles/reset.css";
@@ -28,10 +28,11 @@ export default class Home extends Component {
     }
 
     getUserVehicle = (user) => {
-        axios('http://44.195.209.235/api/Vehicles/User/b6c986fb-c496-41c1-a2b9-5a4bb900c160' , {
+        axios('http://44.195.209.235/api/Vehicles/User/' + parseJwt().jti , {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
+            
         })
             .then(resposta => {
                 if (resposta.status === 200) {
