@@ -21,7 +21,7 @@ class Profile extends Component {
         super(props);
         this.state = {
             example : '',
-            userInfo: [],
+            getUserInfo: [],
             isModalOpen : false
         }
     }
@@ -55,9 +55,10 @@ class Profile extends Component {
         return(
             <>
                 <Sidebar>
+
                     <div className="profile-header">
                         <div className="profile-title">
-                            <h1>Leonardo Rodrigues</h1>
+                            <h1>{this.state.getUserInfo.username}</h1>
                         </div>
                         <div className="profile-texts">
                             <p>Meu Perfil</p>
@@ -67,10 +68,9 @@ class Profile extends Component {
                     <div className="profile-info-background">
                         <div className="profile-info-list">
                             <h2>Informações Pessoais:</h2>
-                            <p>Nome: Leonardo Rodrigues</p>
-                            <p>Email: leonardo@darede.com</p>
-                            <p>Telefone: (11) 5555-5555</p>
-                            <p>Celular: (11) 5555-5555</p>
+                            <p>Nome: {this.state.getUserInfo.username}</p>
+                            <p>Email: {this.state.getUserInfo.email}</p>
+                            <p>Telefone: {this.state.getUserInfo.phoneNumber}</p>
                         </div>
 
                         <div className="profile-info-edit">
