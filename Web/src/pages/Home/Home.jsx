@@ -18,6 +18,7 @@ import car from '../../assets/images/pages/home-red-car-example.svg';
 import close from '../../assets/images/modals/modal-close-icon.svg';
 
 
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -67,7 +68,7 @@ export default class Home extends Component {
                         {
                             this.state.vehicleList.map(vehicle => {
                                 return (
-                                    <Link className="home-content-background">
+                                    <Link className="home-content-background" to="/budget">
                                         <div className="home-content-car-image">
                                             <img src={car} alt="Imagem de um carro vermelho" draggable="false" />
                                         </div>
