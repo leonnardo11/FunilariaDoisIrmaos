@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import swal from 'sweetalert';
+import InputMask from "react-input-mask";
 
 
 // Styles
@@ -30,15 +31,16 @@ export default class Register extends Component {
             password: this.state.Password,
             phoneNumber: this.state.PhoneNumber
         };
-        axios.post('http://44.195.209.235/api/Users', user, {
+        axios.post('https://54.147.100.207/api/Users', user, {
 
         })
 
             .then(resposta => {
                 if (resposta.status === 201) {
                     this.setState({ isLoading: false });
-                    swal("Sucesso!", "Usuário Cadastrado com Sucesso", "success");
-
+                    swal("Sucesso!", "Usuário Cadastrado com Sucesso", "success").then(function() {
+                        window.location = "/";
+                    });;
                 }
             })
             .catch(erro => {
@@ -50,6 +52,11 @@ export default class Register extends Component {
     atualizaStateCampo = (campo) => {
         this.setState({ [campo.target.name] : campo.target.value })
     };
+
+    componentDidMount(){
+        document.title = "Registrar uma conta"
+    }
+
 
     render() {
         return (
@@ -79,7 +86,7 @@ export default class Register extends Component {
                                         onChange={this.atualizaStateCampo}/>
                                     </div>
 
-                                    <div className="register-form-input-separated">
+                                    <div className="register-form-input">
                                         <div className="register-form-input">
                                             <input type="password" placeholder="Digite uma senha"
                                             name="Password"
@@ -90,9 +97,9 @@ export default class Register extends Component {
                                       
                                     </div>
 
-                                    <div className="register-form-input-separated">
+                                    <div className="register-form-input">
                                         <div className="register-form-input">
-                                            <input type="tel" placeholder="Digite o seu telefone" 
+                                            <InputMask mask="(99) 99999-9999" placeholder="Digite o seu telefone" 
                                             value={this.state.phoneNumber}
                                             name="PhoneNumber"
                                             onChange={this.atualizaStateCampo}

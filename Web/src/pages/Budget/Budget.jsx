@@ -19,6 +19,10 @@ class Budget extends Component {
         }
     }
 
+    componentDidMount(){
+        document.title = "Orçamento do Veículo"
+    }
+
     render() {
         return(
             <>

@@ -28,7 +28,7 @@ export default class Home extends Component {
     }
 
     getUserVehicle = (user) => {
-        axios('https://54.147.100.207/api/Vehicles/User/' + parseJwt().jti , {
+        axios('http://44.195.209.235/api/Vehicles/User/' + parseJwt().jti , {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
@@ -64,27 +64,7 @@ export default class Home extends Component {
                         <button onClick={() => this.setState({ isModalOpen: true })}>Novo Veículo</button>
                     </div>
                     <div className="home-card-background">
-                        {
-                            this.state.vehicleList.map(vehicle => {
-                                return (
-                                    <Link className="home-content-background">
-                                        <div className="home-content-car-image">
-                                            <img src={car} alt="Imagem de um carro vermelho" draggable="false" />
-                                        </div>
-
-                                        <div className="home-content-text">
-                                        <h1>{vehicle.brandName} {vehicle.modelName}</h1>
-                                            <p>Placa: {vehicle.licensePlate}</p>
-                                            <p>Cor: {vehicle.color}</p>
-                                        </div>
-
-                                        <div className="home-content-btn">
-                                            <p>Visualizar Orçamentos</p>
-                                        </div>
-                                    </Link>
-                                );
-                            })
-                        }
+                       
                     </div>
                 </Sidebar>
 

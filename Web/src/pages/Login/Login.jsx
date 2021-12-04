@@ -34,7 +34,7 @@ export default class Login extends Component {
     efetuaLogin = (event) => {
         event.preventDefault();
         this.setState({ erroMensagem: '', isLoading: true });
-        axios.post('http://44.195.209.235/api/login', {
+        axios.post('https://54.147.100.207/api/login', {
             email: this.state.email,
             password: this.state.password
 
@@ -46,9 +46,8 @@ export default class Login extends Component {
                     localStorage.setItem('user-token', resposta.data.token);
                     this.setState({ isLoading: false })
                     let base64 = localStorage.getItem('user-token').split('.')[1];
-                    
-                    if (parseJwt().role === 'Administrador') {
-                        this.props.history.push('/Home');
+                    if (parseJwt().role === '0') {
+                        this.props.history.push('/dashallbudget');
                     }
                     else {
                         this.props.history.push('/Home')
@@ -56,8 +55,8 @@ export default class Login extends Component {
                 }
 
             })
-            .catch(() => {
-                swal("Error!", "Usuário ou senha Invalidos!", "error");
+            .catch((erro) => {
+                swal("Ocorreu um erro!", {erro}, "error");
             })
 
     }

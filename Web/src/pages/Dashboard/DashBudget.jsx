@@ -3,20 +3,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { parseJwt } from '../../services/Auth';
+import InputMask from "react-input-mask";
+
 
 // Styles
 import '../../assets/styles/reset.css';
-import '../../assets/styles/pages/profile.css';
+import '../../assets/styles/pages/DashBudget.css';
 import '../../assets/styles/modals/edit-profile.css';
 
 // Components
-import Sidebar from '../../components/Sidebar';
+import SidebarAdmin from '../../components/SidebarAdmin';
 import Modal from '../../components/Modal';
 
 // Images
 import close from '../../assets/images/modals/modal-close-icon.svg';
 
-class Profile extends Component {
+class dash extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -27,7 +29,7 @@ class Profile extends Component {
     }
 
     getUserInfo = (user) => {
-        axios('https://54.147.100.207/api/api/Users/' + parseJwt().jti , {
+        axios('https://54.147.100.207/api/Users/' + parseJwt().jti , {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
@@ -43,8 +45,8 @@ class Profile extends Component {
     };
 
     componentDidMount() {
-        this.getUserInfo();
-        document.title = "Meu Perfil"
+      
+        document.title = "Meus Veículos"
     };
 
     cancelaModal = () => {
@@ -54,32 +56,38 @@ class Profile extends Component {
     render() {
         return(
             <>
-                <Sidebar>
+                <SidebarAdmin>
 
-                    <div className="profile-header">
-                        <div className="profile-title">
-                            <h1>{this.state.getUserInfo.username}</h1>
-                        </div>
-                        <div className="profile-texts">
-                            <p>Meu Perfil</p>
+                    <div className="dash-header">
+    
+                        <div className="dash-texts">
+                            <h1>Orçamento #00000</h1>
                         </div>
                     </div>
 
-                    <div className="profile-info-background">
-                        <div className="profile-info-list">
-                            <h2>Informações Pessoais:</h2>
-                            <p>Nome: {this.state.getUserInfo.username}</p>
-                            <p>Email: {this.state.getUserInfo.email}</p>
-                            <p>Telefone: {this.state.getUserInfo.phoneNumber}</p>
+                    <div className="dash-info-background">
+                        <div className="dash-info-list">
+                            <p>Cliente: {this.state.getUserInfo.username}</p>
+                            <p>Veículo: {this.state.getUserInfo.email}</p>
+                            <p>Defeitos: {this.state.getUserInfo.phoneNumber}</p>
                         </div>
 
-                        <div className="profile-info-edit">
-                            <h2>Editar Informações:</h2>
-                            <button onClick={() => this.setState({isModalOpen : true})}>Editar Informações Pessoais</button>
-                            <button>Alterar minha Senha</button>
+                        <div className="dash-image-slider"> 
+                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
                         </div>
+
+                        <div className="dash-info-edit">
+                
+                            <button onClick={() => this.setState({isModalOpen : true})}>Aceitar Orçamento</button>
+                            <button>Rejeitar Orçamento</button>
+                        </div>
+                    
+                        
                     </div>
-                </Sidebar>
+                </SidebarAdmin>
 
 
 
@@ -95,28 +103,24 @@ class Profile extends Component {
                             <div className="modal-profile-card-form-background">
                                 <div className="modal-profile-card-form">
                                     <div className="modal-profile-card-form-text">
-                                        <h1>Editar Perfil</h1>
-                                        <p>Edite as informações pessoais do seu Perfil</p>
+                                        <h1>Aceitar Orçamento</h1>
                                     </div>
 
                                     <div className="modal-profile-card-form-input-background">
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="Leonardo Rodrigues" />
+                                            <InputMask mask="9999,99"  placeholder="Preço" />
                                         </div>
                                         
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="leonardo@darede.com" />
+                                            <input type="date" placeholder="Previsão para termino" />
                                         </div>
 
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="(11) 5555-5555" />
+                                            <input type="Mecanico Responsável" placeholder="ID Do Mecanico" />
                                         </div>
 
-                                        <div className="modal-profile-card-form-input">
-                                            <input type="text" value="(11) 5555-5555" />
-                                        </div>
-
-                                        <button>Salvar</button>
+                                        
+                                        <button>Enviar</button>
                                     </div>
                                 </div>
                             </div>
@@ -128,4 +132,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default dash;
