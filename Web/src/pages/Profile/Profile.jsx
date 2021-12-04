@@ -27,7 +27,7 @@ class Profile extends Component {
     }
 
     getUserInfo = (user) => {
-        axios('https://54.147.100.207/api/api/Users/' + parseJwt().jti , {
+        axios('https://54.147.100.207/api/Users/' + parseJwt().jti , {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
