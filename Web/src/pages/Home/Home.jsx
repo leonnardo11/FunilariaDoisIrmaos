@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { parseJwt, userAuthentication } from '../../services/Auth';
+import swal from 'sweetalert';
 
 // Styles
 import "../../assets/styles/reset.css";
@@ -23,16 +24,21 @@ export default class Home extends Component {
         super(props);
         this.state = {
             vehicleList: [],
-            isModalOpen: false
+            isModalOpen: false,
+            modelName: '',
+            brandName: '',
+            licensePlate: '',
+            year: '',
+            color: ''
         };
     }
 
     getUserVehicle = (user) => {
-        axios('https://54.147.100.207/api/Vehicles/User/' + parseJwt().jti , {
+        axios('https://54.147.100.207/api/Vehicles/User/' + parseJwt().jti, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
-            
+
         })
             .then(resposta => {
                 if (resposta.status === 200) {
@@ -41,6 +47,39 @@ export default class Home extends Component {
                 }
             })
             .catch(erro => console.log(erro));
+    };
+
+    cadastrarCarro = (event) => {
+        event.preventDefault();
+        let carro = {
+            modelName: this.state.carro.modelName,
+            brandName: this.state.carro.brandName,
+            year: this.state.carro.year,
+            color: this.state.carro.color,
+            licensePlate: this.state.carro.licensePlate,
+            id: this.state.carro.id
+        };
+
+        axios.post("https://54.147.100.207/api/Vehicles", carro)
+
+            .then((resposta) => {
+                if (resposta.status === 201) {
+                    swal("Sucesso!", `O carro  foi cadastrado com sucesso!`, "success").then(function () {
+                        window.location = "/Home";
+                    });;
+                }
+            })
+
+            .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"));
+    };
+
+    updateState = (campo) => {
+        this.setState((prevState) => ({
+            carro: {
+                ...prevState.carro,
+                [campo.target.name]: campo.target.value,
+            },
+        }));
     };
 
     // Chama as funções assim que a tela é renderizada
@@ -73,7 +112,7 @@ export default class Home extends Component {
                                         </div>
 
                                         <div className="home-content-text">
-                                        <h1>{vehicle.brandName} {vehicle.modelName}</h1>
+                                            <h1>{vehicle.brandName} {vehicle.modelName}</h1>
                                             <p>Placa: {vehicle.licensePlate}</p>
                                             <p>Cor: {vehicle.color}</p>
                                         </div>
@@ -105,30 +144,36 @@ export default class Home extends Component {
                                         <h1>Adicionar um novo veículo</h1>
                                         <p>Adicione as informações do seu Veículo</p>
                                     </div>
+                                    <form onSubmit={this.cadastrarCarro} >
+                                        <div className="modal-vehicle-card-form-input-background">
+                                            <div className="modal-vehicle-card-form-input">
+                                                <input type="text" placeholder="Insira o Modelo de seu Veículo" name="modelName" value={this.cadastrarCarro.modelName}
+                                                    onChange={this.updateState} />
+                                            </div>
 
-                                    <div className="modal-vehicle-card-form-input-background">
-                                        <div className="modal-vehicle-card-form-input">
-                                            <input type="text" placeholder="Insira o Modelo de seu Veículo" />
+                                            <div className="modal-vehicle-card-form-input">
+                                                <input type="text" placeholder="Marca" name="brandName" value={this.cadastrarCarro.brandName}
+                                                    onChange={this.updateState} />
+                                            </div>
+
+                                            <div className="modal-vehicle-card-form-input">
+                                                <input type="year" placeholder="Ano"  name="year" value={this.cadastrarCarro.year}
+                                                    onChange={this.updateState} />
+                                            </div>
+
+                                            <div className="modal-vehicle-card-form-input">
+                                                <input type="text" placeholder="Cor"  name="color" value={this.cadastrarCarro.color}
+                                                    onChange={this.updateState}/>
+                                            </div>
+
+                                            <div className="modal-vehicle-card-form-input">
+                                                <input type="text" placeholder="Placa"  name="licensePlate" value={this.cadastrarCarro.licensePlate}
+                                                    onChange={this.updateState} />
+                                            </div>
+
+                                            <button type="submit">Adicionar Veículo</button>
                                         </div>
-
-                                        <div className="modal-vehicle-card-form-input">
-                                            <input type="text" placeholder="Marca" />
-                                        </div>
-
-                                        <div className="modal-vehicle-card-form-input">
-                                            <input type="year" placeholder="Ano" />
-                                        </div>
-
-                                        <div className="modal-vehicle-card-form-input">
-                                            <input type="text" placeholder="Cor" />
-                                        </div>
-
-                                        <div className="modal-vehicle-card-form-input">
-                                            <input type="text" placeholder="Placa" />
-                                        </div>
-
-                                        <button>Adicionar Veículo</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

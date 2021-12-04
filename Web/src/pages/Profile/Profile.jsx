@@ -47,6 +47,11 @@ class Profile extends Component {
         document.title = "Meu Perfil"
     };
 
+    atualizaStateCampo = (campo) => {
+        this.setState({ [campo.target.name] : campo.target.value })
+    };
+
+
     cancelaModal = () => {
         this.setState({ isModalOpen : false })
     }
@@ -101,21 +106,16 @@ class Profile extends Component {
 
                                     <div className="modal-profile-card-form-input-background">
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="Leonardo Rodrigues" />
+                                            <input type="text" name="username" onChange={this.atualizaStateCampo} value={this.state.getUserInfo.username} />
                                         </div>
                                         
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="leonardo@darede.com" />
+                                            <input type="text" value={this.state.getUserInfo.email} />
                                         </div>
 
                                         <div className="modal-profile-card-form-input">
-                                            <input type="text" value="(11) 5555-5555" />
+                                            <input type="text" value={this.state.getUserInfo.phoneNumber} />
                                         </div>
-
-                                        <div className="modal-profile-card-form-input">
-                                            <input type="text" value="(11) 5555-5555" />
-                                        </div>
-
                                         <button>Salvar</button>
                                     </div>
                                 </div>

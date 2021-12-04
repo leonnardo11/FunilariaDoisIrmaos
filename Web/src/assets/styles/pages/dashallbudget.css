@@ -30,6 +30,7 @@
 }
 
 summary {
+  position: relative;
   display: flex;
   width: 90%;
   height: 4%;
@@ -66,6 +67,7 @@ summary p {
     opacity: 1;
     margin-top: -10px;
     background: #ffffff;
+    
   }
 }
 
@@ -76,6 +78,7 @@ summary p {
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
+  padding: 30px;
   margin-top: -1em;
   display: flex;
   justify-content: space-between;
