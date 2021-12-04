@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { parseJwt, userAuthentication } from '../../services/Auth';
 import swal from 'sweetalert';
+import jwtDecode from 'jwt-decode'
 
 // Styles
 import "../../assets/styles/reset.css";
@@ -25,6 +26,7 @@ export default class Home extends Component {
         this.state = {
             vehicleList: [],
             isModalOpen: false,
+            idUserLogged: '',
             modelName: '',
             brandName: '',
             licensePlate: '',
@@ -52,19 +54,20 @@ export default class Home extends Component {
     cadastrarCarro = (event) => {
         event.preventDefault();
         let carro = {
+            idUser: this.state.idUserLogged,
             modelName: this.state.carro.modelName,
             brandName: this.state.carro.brandName,
             year: this.state.carro.year,
             color: this.state.carro.color,
-            licensePlate: this.state.carro.licensePlate,
-            id: this.state.carro.id
+            licensePlate: this.state.carro.licensePlate
+    
         };
 
         axios.post("https://54.147.100.207/api/Vehicles", carro)
 
             .then((resposta) => {
                 if (resposta.status === 201) {
-                    swal("Sucesso!", `O carro  foi cadastrado com sucesso!`, "success").then(function () {
+                    swal("Sucesso!", `O Veículo foi cadastrado com sucesso!`, "success").then(function () {
                         window.location = "/Home";
                     });;
                 }
@@ -72,6 +75,32 @@ export default class Home extends Component {
 
             .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"));
     };
+
+    GetIdUserLogged = async () => {
+
+        try {
+
+            const valueToken = await localStorage.getItem('user-token')
+
+            var idToken = jwtDecode(valueToken).jti
+
+            this.setState({ idUserLogged: idToken })
+
+            this.state.dataProfile = await axios.get('https://54.147.100.207/api/Users/' + this.state.idUserLogged)
+
+            this.setState({ idUserLogged: this.state.dataProfile.data.id })
+
+            console.log(this.state.idUserLogged)
+
+        }
+
+        catch (error) {
+
+            console.log(error)
+
+        }
+
+    }
 
     updateState = (campo) => {
         this.setState((prevState) => ({
@@ -84,6 +113,7 @@ export default class Home extends Component {
 
     // Chama as funções assim que a tela é renderizada
     componentDidMount() {
+        this.GetIdUserLogged()
         this.getUserVehicle();
         document.title = "Meus Veículos"
     };
@@ -148,27 +178,27 @@ export default class Home extends Component {
                                         <div className="modal-vehicle-card-form-input-background">
                                             <div className="modal-vehicle-card-form-input">
                                                 <input type="text" placeholder="Insira o Modelo de seu Veículo" name="modelName" value={this.cadastrarCarro.modelName}
-                                                    onChange={this.updateState} />
+                                                    onChange={this.updateState} required/>
                                             </div>
 
                                             <div className="modal-vehicle-card-form-input">
                                                 <input type="text" placeholder="Marca" name="brandName" value={this.cadastrarCarro.brandName}
-                                                    onChange={this.updateState} />
+                                                    onChange={this.updateState} required/>
                                             </div>
 
                                             <div className="modal-vehicle-card-form-input">
                                                 <input type="year" placeholder="Ano"  name="year" value={this.cadastrarCarro.year}
-                                                    onChange={this.updateState} />
+                                                    onChange={this.updateState} required />
                                             </div>
 
                                             <div className="modal-vehicle-card-form-input">
                                                 <input type="text" placeholder="Cor"  name="color" value={this.cadastrarCarro.color}
-                                                    onChange={this.updateState}/>
+                                                    onChange={this.updateState} required/>
                                             </div>
 
                                             <div className="modal-vehicle-card-form-input">
                                                 <input type="text" placeholder="Placa"  name="licensePlate" value={this.cadastrarCarro.licensePlate}
-                                                    onChange={this.updateState} />
+                                                    onChange={this.updateState}required />
                                             </div>
 
                                             <button type="submit">Adicionar Veículo</button>
