@@ -2,19 +2,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import Modal from '../../components/Modal';
+import Modal from '../../../components/Modal';
+import swal from 'sweetalert'
 
 
 
 // Styles
-import '../../assets/styles/pages/dashallbudget.css';
-import '../../assets/styles/modals/edit-profile.css';
-
+import './DashAllUsers.css'
 // Components
-import SidebarAdmin from '../../components/SidebarAdmin';
+import SidebarAdmin from '../../../components/SidebarAdmin';
 
 // Images
-import close from '../../assets/images/modals/modal-close-icon.svg';
+import close from '../../../assets/images/modals/modal-close-icon.svg';
 
 
 class DashAllUsers extends Component {
@@ -43,6 +42,23 @@ class DashAllUsers extends Component {
             .catch(erro => console.log(erro));
     };
 
+    delUser = (User) => {
+        this.setState({
+            idUser : User.id
+        })
+        axios.delete('https://54.147.100.207/api/Users?' + User.id )
+        .then(resposta => {
+            if (resposta.status === 204) {
+              swal("Sucesso!", "A O Equipamento foi deletado com Sucesso!", "success");
+            }
+        })
+        .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"))
+        .then(this.getAllUsers)
+    }
+
+
+    
+
     componentDidMount() {
         this.getAllUsers();
         document.title = "Usuários"
@@ -56,37 +72,31 @@ class DashAllUsers extends Component {
         return (
             <>
                 <SidebarAdmin>
-                    <main>
-                        <h1 className="dash-title">Todos Usuários</h1>
-                        <div class="main-header">
-                            <p>Nome</p>
-                            <p>Email</p>
-                            <p>Telefone</p>
-                        </div>
+                <div className="dash-title">
+                        <h1>Usuários</h1>
+                    </div>
+                    <div className="dash-card-background">
                         {
-                            this.state.UserList.map(users => {
+                            this.state.UserList.map(user => {
                                 return (
-                                    <section className="main-equip">
-                                        <details>
-                                            <summary>
-                                                <p>{users.username}</p>
-                                                <p>{users.email}</p>
-                                                <p>{users.phoneNumber}</p>
-                                            </summary>
-                                            <div className="content">
-                                                <div className="paragrafos">
-                                                    <p>Nome: {users.username}</p>
-                                                    <p>Email: {users.email}</p>
-                                                    <p>Telefone: {users.phoneNumber}</p>
-                                                </div>
-                                                <button className="btn-edit" onClick={() => this.setState({ isModalOpen: true })}>Editar</button>
-                                            </div>
-                                        </details>
-                                    </section>
+                                    <Link className="dash-content-background">
+                                        
+                                        
+                                        <div className="dash-content-text" >
+                                            <h1>Usuário: {user.username}</h1>
+                                            <p>Email: {user.email}</p>
+                                            <p>Telefone: {user.phoneNumber}</p>
+                                        </div>
+
+                                        <div className="dash-content-btn">
+                                            <p onClick={() => this.delUser(user)}>Deletar Usuário</p>
+                                            <p onClick={() => this.setState({ isModalOpen: true })}>Editar Usuário</p>
+                                        </div>
+                                    </Link>
                                 );
                             })
                         }
-                    </main>
+                    </div>
                 </SidebarAdmin>
 
                 {/* Modal */}
@@ -120,7 +130,9 @@ class DashAllUsers extends Component {
                                         <div className="modal-vehicle-card-form-input">
                                             <input type="text" placeholder="Email" />
                                         </div>
+                                        <div className="btn-modal">
                                         <button>Editar Usuário</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

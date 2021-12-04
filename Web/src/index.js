@@ -16,7 +16,7 @@ import Profile from './pages/Profile/Profile';
 import NotFound from './pages/NotFound/NotFound';
 import DashBudget from  './pages/Dashboard/DashBudget'
 import DashAllBugdets from './pages/Dashboard/DashAllBudget';
-import DashAllUsers from './pages/Dashboard/DashAllUsers';
+import DashAllUsers from './pages/Dashboard/DashAllUsers/DashAllUsers';
 
 const routing = (
   <Router>

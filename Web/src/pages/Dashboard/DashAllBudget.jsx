@@ -30,7 +30,7 @@ class DashAllBugdets extends Component {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
-            
+
         })
             .then(resposta => {
                 if (resposta.status === 200) {
@@ -54,46 +54,35 @@ class DashAllBugdets extends Component {
         return (
             <>
                 <SidebarAdmin>
-                            <main>
-                                <h1 className="dash-title">Todos Orçamentos</h1>
-                                <div class="main-header"> 
-                                    <p>Orçamento</p>
-                                    <p>Cliente</p>
-                                    <p>Status</p>
-                                </div>
-                                {
-                            this.state.BudgetList.map(Budget => {
+                <div className="dash-title">
+                        <h1>Orçamentos</h1>
+                    </div>
+                    <div className="dash-card-background">
+                        {
+                            this.state.BudgetList.map(budget => {
                                 return (
-                                    <section className="main-equip">
-                                    <details>
-                                        <summary>
-                                            <p></p>
-                                            <p>Cliente</p>
-                                            <p>Pendente</p>
-                                        </summary>
-                                        <div className="content">
-                                            <div className="paragrafos">
-                                                <p>Cliente: Leonardo Rodrigues</p>
-                                                <p>Veículo: Chevrolet Onix</p>
-                                                <p>Status: Pendente</p>
-
-                                            </div>
-                                            <div className="botoes">
-                                                <Link to="/DashBudget">
-                                                <a  className="btn-edit">Editar</a>
-                                                </Link>
-                                            </div>
+                                    <Link className="dash-content-background" to="/dashbudget">
+                                        
+                                        
+                                        <div className="dash-content-text" >
+                                            <h1>Veículo: {budget.vehicle.brandName} {budget.vehicle.modelName}</h1>
+                                            <p>Placa: {budget.vehicle.licensePlate}</p>
+                                            <p>Cor: {budget.vehicle.color}</p>
+                                            <p>Serviços: {budget.services[0].serviceDescription}</p>
                                         </div>
-                                    </details>
-                                </section>
+
+                                        <div className="dash-content-btn">
+                                            <p>Ver Orçamento</p>
+                                        </div>
+                                    </Link>
                                 );
                             })
                         }
-                            </main>
-                        </SidebarAdmin>
-                    </>
-                    )
+                    </div>
+                </SidebarAdmin>
+            </>
+        )
     }
 }
 
-                    export default DashAllBugdets;
+export default DashAllBugdets;

@@ -29,6 +29,10 @@ class Sidebar extends Component {
         }
     }
 
+    funcaoLogout = () => {
+        localStorage.removeItem('user-token')
+    }
+
     componentDidMount() {
         toggleClickBtn();
     }
@@ -56,7 +60,7 @@ class Sidebar extends Component {
                                     </Link>
                                 </div>
                                 
-                                <Link to="/" className="sidebar-content-btn">
+                                <Link to="/" className="sidebar-content-btn" >
                                     <p>Deslogar</p>
                                 </Link>
                             </div>
