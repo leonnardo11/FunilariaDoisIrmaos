@@ -19,21 +19,21 @@ import Modal from '../../components/Modal';
 import close from '../../assets/images/modals/modal-close-icon.svg';
 
 class dash extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            example : '',
+            example: '',
             getUserInfo: [],
-            isModalOpen : false
+            isModalOpen: false
         }
     }
 
     getUserInfo = (user) => {
-        axios('https://54.147.100.207/api/Users/' + parseJwt().jti , {
+        axios('https://54.147.100.207/api/Users/' + parseJwt().jti, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
-            
+
         })
             .then(resposta => {
                 if (resposta.status === 200) {
@@ -45,21 +45,20 @@ class dash extends Component {
     };
 
     componentDidMount() {
-      
+
         document.title = "Meus Veículos"
     };
 
     cancelaModal = () => {
-        this.setState({ isModalOpen : false })
+        this.setState({ isModalOpen: false })
     }
 
     render() {
-        return(
+        return (
             <>
                 <SidebarAdmin>
 
                     <div className="dash-header">
-    
                         <div className="dash-texts">
                             <h1>Orçamento #00000</h1>
                         </div>
@@ -67,25 +66,40 @@ class dash extends Component {
 
                     <div className="dash-info-background">
                         <div className="dash-info-list">
-                            <p>Cliente: {this.state.getUserInfo.username}</p>
-                            <p>Veículo: {this.state.getUserInfo.email}</p>
-                            <p>Defeitos: {this.state.getUserInfo.phoneNumber}</p>
+                            <p>Cliente: Leonardo Rodrigues</p>
+                            <p>Veículo: Chevrolet Onix</p>
+                            <p>Placa: ABC-1090</p>
                         </div>
 
-                        <div className="dash-image-slider"> 
-                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
-                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
-                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
-                        <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                        <div className="main-header"> 
+                                    <p>Serviços</p>
                         </div>
+                        <div className="main-services">
+                            <p>Troca de Rodas</p>
+                            <p>Pintar veículo de azul</p>
+                        </div>
+                        <details>
+                            <summary className="summary-budget">
+                               <p>Fotos do Veículo</p>
+                            </summary>
+                            <div className="content">
+                                <div className="dash-image-slider">
+                                    <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                                    <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                                    <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                                    <img src="https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg" alt="" srcset="" />
+                                </div>
+                            </div>
+                        </details>
+
 
                         <div className="dash-info-edit">
-                
-                            <button onClick={() => this.setState({isModalOpen : true})}>Aceitar Orçamento</button>
+
+                            <button onClick={() => this.setState({ isModalOpen: true })}>Aceitar Orçamento</button>
                             <button>Rejeitar Orçamento</button>
                         </div>
-                    
-                        
+
+
                     </div>
                 </SidebarAdmin>
 
@@ -108,9 +122,9 @@ class dash extends Component {
 
                                     <div className="modal-profile-card-form-input-background">
                                         <div className="modal-profile-card-form-input">
-                                            <InputMask mask="9999,99"  placeholder="Preço" />
+                                            <InputMask mask="9999,99" placeholder="Preço" />
                                         </div>
-                                        
+
                                         <div className="modal-profile-card-form-input">
                                             <input type="date" placeholder="Previsão para termino" />
                                         </div>
@@ -119,7 +133,7 @@ class dash extends Component {
                                             <input type="Mecanico Responsável" placeholder="ID Do Mecanico" />
                                         </div>
 
-                                        
+
                                         <button>Enviar</button>
                                     </div>
                                 </div>
