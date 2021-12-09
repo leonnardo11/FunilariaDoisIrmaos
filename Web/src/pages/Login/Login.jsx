@@ -34,7 +34,7 @@ export default class Login extends Component {
     efetuaLogin = (event) => {
         event.preventDefault();
         this.setState({ erroMensagem: '', isLoading: true });
-        axios.post('https://54.147.100.207/api/login', {
+        axios.post('https://54.147.100.207/api/Login', {
             email: this.state.email,
             password: this.state.password
 

@@ -67,8 +67,8 @@ class DashAllBugdets extends Component {
                                         <div className="dash-content-text" >
                                             <h1>Veículo: {budget.vehicle.brandName} {budget.vehicle.modelName}</h1>
                                             <p>Placa: {budget.vehicle.licensePlate}</p>
-                                            <p>Cor: {budget.vehicle.color}</p>
-                                            <p>Serviços: {budget.services[0].serviceDescription}</p>
+                                            <p>Serviços: {budget.services.forEach.serviceDescription}</p>
+                                            <p>Valor: R$ {budget.totalValue}</p>
                                         </div>
 
                                         <div className="dash-content-btn">

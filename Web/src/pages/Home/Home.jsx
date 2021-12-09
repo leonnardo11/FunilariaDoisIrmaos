@@ -45,7 +45,7 @@ export default class Home extends Component {
             .then(resposta => {
                 if (resposta.status === 200) {
                     this.setState({ vehicleList: resposta.data })
-                    console.log(this.state.vehicleList)
+                    console.log(typeof(this.state.vehicleList))
                 }
             })
             .catch(erro => console.log(erro));
@@ -54,7 +54,7 @@ export default class Home extends Component {
     cadastrarCarro = (event) => {
         event.preventDefault();
         let carro = {
-            idUser: this.state.idUserLogged,
+            idUser: parseJwt().jti,
             modelName: this.state.carro.modelName,
             brandName: this.state.carro.brandName,
             year: this.state.carro.year,
@@ -76,29 +76,12 @@ export default class Home extends Component {
             .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"));
     };
 
-    GetIdUserLogged = async () => {
-
-        try {
-            const valueToken = await localStorage.getItem('user-token')
-            var idToken = jwtDecode(valueToken).jti
-            this.setState({ idUserLogged: idToken })
-            this.state.dataProfile = await axios.get('https://54.147.100.207/api/Users/' + this.state.idUserLogged)
-            this.setState({ idUserLogged: this.state.dataProfile.data.id })
-
-        }
-        catch (error) {
-            swal("Ocorreu um erro :(", `${error}`, "error");
-        }
-
-    }
 
     GetIdVehicleService = (id) => {
-
         try {
           console.log(id)
           this.setState(() => localStorage.getItem('IdVehicleService', id))
         }
-    
         catch (error) {
           console.log(error)
         }
@@ -116,7 +99,6 @@ export default class Home extends Component {
 
     // Chama as funções assim que a tela é renderizada
     componentDidMount() {
-        this.GetIdUserLogged()
         this.getUserVehicle();
         document.title = "Meus Veículos"
     };
@@ -151,7 +133,7 @@ export default class Home extends Component {
                                         </div>
 
                                         <div className="home-content-btn">
-                                            <p>Visualizar Orçamentos</p>
+                                            <p on>Visualizar Orçamentos</p>
                                         </div>
                                     </Link>
                                 );

@@ -15,11 +15,23 @@ class Budget extends Component {
     constructor(props){
         super(props);
         this.state = {
-            example : ''
+            BudgetList: [],
         }
     }
 
+    getVehicleBudget = () => {
+        axios('https://54.147.100.207/api/Budgets')
+            .then(resposta => {
+                if (resposta.status === 200) {
+                    this.setState({ BudgetList: resposta.data })
+                    console.log(this.state.BudgetList);
+                }
+            })
+            .catch(erro => console.log(erro));
+    };
+
     componentDidMount(){
+        this.getVehicleBudget();
         document.title = "Orçamento do Veículo"
     }
 
@@ -30,7 +42,7 @@ class Budget extends Component {
                     <div className="budget-header">
                         <Link to="/home" className="budget-header-back">{"< Meus Veículos"}</Link>
                         <div className="budget-title">
-                            <h1>Chevrolet Onix</h1>
+                            <h1></h1>
                         </div>
                         <div className="budget-placa">
                             <p>Placa: ABC-1234</p>
@@ -53,33 +65,8 @@ class Budget extends Component {
                                      <p className="budget-content-btn-valor">Valor: R$ 3.872,28</p>
                                 </div>
                             </Link>
-
-                            <Link to="/services" className="budget-content-background">
-                                <div className="budget-content-text">
-                                    <h1>Orçamento #0002</h1>
-                                     <p>Data de Início: ----</p>
-                                     <p>Data de Término: ----</p>
-                                </div>
-
-                                <div className="budget-content-btn">
-                                     <p>Status: Rejeitado pelo Cliente</p>
-                                     <p className="budget-content-btn-valor">Valor: R$ 872,28</p>
-                                </div>
-                            </Link>
-
-                            <Link to="/services" className="budget-content-background">
-                                <div className="budget-content-text">
-                                    <h1>Orçamento #0003</h1>
-                                     <p>Data de Início: ----</p>
-                                     <p>Data de Término: ----</p>
-                                </div>
-
-                                <div className="budget-content-btn">
-                                     <p>Status: Pendente</p>
-                                     <p className="budget-content-btn-valor">Valor: R$ 3.872,28</p>
-                                </div>
-                            </Link>
                         </div>
+    
                     </div>
                 </Sidebar>
             </>

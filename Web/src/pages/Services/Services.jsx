@@ -1,7 +1,6 @@
 // Libs
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from "axios";
 
 // Styles
 import '../../assets/styles/reset.css';
