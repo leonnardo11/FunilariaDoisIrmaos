@@ -29,7 +29,7 @@ class dash extends Component {
     }
 
     getUserInfo = (user) => {
-        axios('https://54.147.100.207/api/Services/Budget/f5dc553a-4098-4cd9-afe6-1e501b230547' ,{
+        axios('https://54.147.100.207/api/Services/Budget/845b4179-298a-48c0-a788-7261d66f2c60' ,{
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
