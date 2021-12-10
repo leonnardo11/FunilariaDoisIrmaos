@@ -50,7 +50,7 @@ class Budget extends Component {
                     </div>
 
                     <div className="budget-card-background">
-                        <p className="budget-card-background-title">Orçamentos</p>
+                        <p className="budget-card-background-title">Orçamento</p>
                         {
                             this.state.BudgetList.map(budget => {
                                 return (
