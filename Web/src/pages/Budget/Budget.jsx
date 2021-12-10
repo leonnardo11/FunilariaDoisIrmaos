@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { parseJwt, userAuthentication } from '../../services/Auth';
 
 // Styles
 import '../../assets/styles/reset.css';
@@ -20,11 +21,13 @@ class Budget extends Component {
     }
 
     getVehicleBudget = () => {
-        axios('https://54.147.100.207/api/Budgets/Vehicle/7f99dc6d-4395-4c03-b035-1f4229bc3d60')
+
+        axios.get('https://54.147.100.207/api/Budgets/Vehicle/7f99dc6d-4395-4c03-b035-1f4229bc3d60')
             .then(resposta => {
                 if (resposta.status === 200) {
                     this.setState({ BudgetList: resposta.data })
                     console.log(this.state.BudgetList);
+                    console.log(typeof (this.state.BudgetList))
                 }
             })
             .catch(erro => console.log(erro));
