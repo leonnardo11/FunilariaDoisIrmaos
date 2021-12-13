@@ -45,7 +45,7 @@ export default class Home extends Component {
             .then(resposta => {
                 if (resposta.status === 200) {
                     this.setState({ vehicleList: resposta.data })
-                    console.log(typeof(this.state.vehicleList))
+                    console.log(this.state.vehicleList)
                 }
             })
             .catch(erro => console.log(erro));
@@ -76,17 +76,6 @@ export default class Home extends Component {
             .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"));
     };
 
-
-    GetIdVehicleService = (id) => {
-        try {
-          console.log(id)
-          this.setState(() => localStorage.getItem('IdVehicleService', id))
-        }
-        catch (error) {
-          console.log(error)
-        }
-    
-      }
 
     updateState = (campo) => {
         this.setState((prevState) => ({
@@ -121,7 +110,9 @@ export default class Home extends Component {
                         {
                             this.state.vehicleList.map(vehicle => {
                                 return (
-                                    <Link className="home-content-background" onPress={() => this.GetIdVehicleService(vehicle.id)} to="/Budgets">
+                                    <Link className="home-content-background" to={{
+                                        pathname: "/budgets/" + vehicle.id,
+                                      }}>
                                         <div className="home-content-car-image">
                                             <img src={car} alt="Imagem de um carro vermelho" draggable="false" />
                                         </div>

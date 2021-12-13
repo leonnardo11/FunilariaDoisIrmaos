@@ -25,7 +25,7 @@ const routing = (
         <Route exact path="/" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/budgets" component={Budget} />
+        <Route path="/budgets/:id" component={Budget} />
         <Route exact path="/services" component={Services} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/dashbudget" component={DashBudget} />
