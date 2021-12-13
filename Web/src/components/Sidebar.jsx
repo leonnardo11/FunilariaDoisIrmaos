@@ -61,7 +61,7 @@ class Sidebar extends Component {
                                 </div>
                                 
                                 <Link to="/" className="sidebar-content-btn" >
-                                    <p>Deslogar</p>
+                                    <p onClick={() => this.funcaoLogout()}>Deslogar</p>
                                 </Link>
                             </div>
                             
