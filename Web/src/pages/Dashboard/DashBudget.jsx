@@ -93,7 +93,7 @@ class dash extends Component {
                                 {
                                 this.state.getBudgetInfo.map(user => {
                                     return (
-                                      <img src={user.serviceDescription} />
+                                      <img src={user.serviceImages.pathName} />
                                     );
                                 })
                             }
