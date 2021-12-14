@@ -17,21 +17,23 @@ import NotFound from './pages/NotFound/NotFound';
 import DashBudget from './pages/Dashboard/DashBudget'
 import DashAllBugdets from './pages/Dashboard/DashAllBudget';
 import DashAllUsers from './pages/Dashboard/DashAllUsers/DashAllUsers';
+import dashbudget2 from './pages/Dashboard/DashBudget2';
 
 const routing = (
   <Router>
     <div>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/home" component={Home} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/home" component={Home} />
         <Route path="/budgets/:id" component={Budget} />
         <Route path="/services" component={Services} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/dashbudget/:id" component={DashBudget} />
-        <Route path="/dashallbudget" component={DashAllBugdets} />
-        <Route path="/dashallusers" component={DashAllUsers} />
+        <Route exact path="/profile" component={Profile} />
+        <Route  path="/dashbudget/:id" component={DashBudget} />
+        <Route exact path="/dashallbudget" component={DashAllBugdets} />
+        <Route exact path="/dashallusers" component={DashAllUsers} />
         <Route exact path="/notfound" component={NotFound} />
+        <Route exact path="/dashbudget2/:id" component={dashbudget2} />
         <Redirect to="/notfound" />
       </Switch>
     </div>

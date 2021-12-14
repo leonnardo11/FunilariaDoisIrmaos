@@ -46,10 +46,10 @@ class DashAllUsers extends Component {
         this.setState({
             idUser : User.id
         })
-        axios.delete('https://54.147.100.207/api/Users?' + User.id )
+        axios.delete('https://54.147.100.207/api/Users?id=' + User.id )
         .then(resposta => {
             if (resposta.status === 204) {
-              swal("Sucesso!", "A O Equipamento foi deletado com Sucesso!", "success");
+              swal("Sucesso!", "O Usuário foi deletado com Sucesso!", "success");
             }
         })
         .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"))

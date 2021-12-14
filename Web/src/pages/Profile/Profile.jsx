@@ -54,7 +54,6 @@ class Profile extends Component {
         event.preventDefault();
 
         let editUser = {
-            userId: parseJwt().jti,
             username: this.state.editUser.username,
             email: this.state.editUser.email,
             phoneNumber: this.state.editUser.phoneNumber,
@@ -123,7 +122,6 @@ class Profile extends Component {
                         <div className="profile-info-edit">
                             <h2>Editar Informações:</h2>
                             <button onClick={() => this.setState({ isModalOpen: true })}>Editar Informações Pessoais</button>
-                            <button>Alterar minha Senha</button>
                         </div>
                     </div>
                 </Sidebar>

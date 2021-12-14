@@ -61,15 +61,15 @@ class DashAllBugdets extends Component {
                         {
                             this.state.BudgetList.map(budget => {
                                 return (
-                                    <Link className="dash-content-background" to={{
-                                        pathname: "/dashbudget/" + budget.id,
+                                    <Link className="dash-content-background"  to={{
+                                        pathname: "/dashbudget2/" + budget.id,
                                       }}>
                                         
                                         
                                         <div className="dash-content-text" >
                                             <h1>Veículo: {budget.vehicle.brandName} {budget.vehicle.modelName}</h1>
                                             <p>Placa: {budget.vehicle.licensePlate}</p>
-                                            <p>Serviços: {budget.services[0].serviceDescription}</p>
+                                            <p>Serviços: {budget.services.serviceDescription}</p>
                                             <p>Valor: R$ {budget.totalValue}</p>
                                         </div>
 

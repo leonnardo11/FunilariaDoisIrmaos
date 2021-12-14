@@ -30,24 +30,13 @@ class dash extends Component {
         }
     }
 
-   
-    getBudgetInfo = () => {
+    getUserInfo = () => {
         axios('https://54.147.100.207/api/Services/Budget/' + this.props.match.params.id)
             .then(resposta => {
                 if (resposta.status === 200) {
-                    this.setState({ getBudgetInfo: resposta.data })
-                    console.log(this.state.getBudgetInfo)
-                }
-            })
-            .catch(erro => console.log(erro));
-    };
-
-    getImageService = () => {
-        axios('https://54.147.100.207/api/Services/Budget/' + this.props.match.params.id)
-            .then(resposta => {
-                if (resposta.status === 200) {
-                    this.setState({ getImageService: resposta.data })
-                    console.log(this.state.getImageService)
+                    this.setState({ getUserInfo: resposta.data })
+                    console.log(this.state.getUserInfo)
+                    console.log(this.state.getUserInfo[0].serviceImages[0].imagePath)
                 }
             })
             .catch(erro => console.log(erro));
@@ -67,6 +56,13 @@ class dash extends Component {
         return (
             <>
                 <SidebarAdmin>
+
+                    <div className="dash-header">
+                        <div className="dash-texts">
+                            <h1>Orçamento</h1>
+                        </div>
+                    </div>
+
                     <div className="dash-info-background">
                         <div className="dash-info-list">
                             <p>Cliente: Leonardo Rodrigues</p>
@@ -78,27 +74,26 @@ class dash extends Component {
                             <p>Serviços</p>
                         </div>
                         <div className="main-services">
-                            {
-                                this.state.getBudgetInfo.map(user => {
-                                    return (
-                                        <p>{user.serviceDescription}</p>
-                                    );
-                                })
-                            }
+                        {
+                                    this.state.getUserInfo.map(budget => {
+                                        return (
+                                          <p>{budget.serviceDescription}</p>
+                                        );
+                                    })
+                                }
                         </div>
 
-
                         <div className="content">
-                                <div className="dash-image-slider">
+                            <div className="dash-image-slider">
                                 {
-                                this.state.getBudgetInfo.map(user => {
-                                    return (
-                                      <img src={user.serviceImages.pathName} />
-                                    );
-                                })
-                            }
-                                </div>
+                                    this.state.getUserInfo.map(budget => {
+                                        return (
+                                            <img src={'https://54.147.100.207/Images/' + budget.serviceImages[0].imagePath} alt="Imagem de um carro vermelho" draggable="false" />
+                                        );
+                                    })
+                                }
                             </div>
+                        </div>
                         <div className="dash-info-edit">
                             <button onClick={() => this.setState({ isModalOpen: true })}>Aceitar Orçamento</button>
                             <button>Rejeitar Orçamento</button>

@@ -76,7 +76,6 @@ export default class Home extends Component {
             .catch((erro) => swal("Ocorreu um erro :(", `${erro}`, "error"));
     };
 
-
     updateState = (campo) => {
         this.setState((prevState) => ({
             carro: {
@@ -85,6 +84,8 @@ export default class Home extends Component {
             },
         }));
     };
+
+   
 
     // Chama as funções assim que a tela é renderizada
     componentDidMount() {
@@ -110,7 +111,7 @@ export default class Home extends Component {
                         {
                             this.state.vehicleList.map(vehicle => {
                                 return (
-                                    <Link className="home-content-background" to={{
+                                    <Link className="home-content-background"  to={{
                                         pathname: "/budgets/" + vehicle.id,
                                       }}>
                                         <div className="home-content-car-image">
